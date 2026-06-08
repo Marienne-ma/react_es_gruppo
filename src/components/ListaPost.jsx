@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import {
 	Container,
 	Title,
@@ -12,32 +10,30 @@ import {
 	Loader,
 	Center,
 } from "@mantine/core";
-import { usePostStore } from "../store/useGiveawayStore";
-import { FormPost } from "./FormPost";
+import { useEffect } from "react";
+import { useGiveawayStore } from "../store/useGiveawayStore.js";
+import { useNavigate } from "react-router-dom";
 
 export function ListaPost() {
 	const navigate = useNavigate();
 
 	// 1. Recuperiamo lo stato e le azioni dallo store Zustand
-	const posts = usePostStore((state) => state.posts);
-	const loading = usePostStore((state) => state.loading);
-	const error = usePostStore((state) => state.error);
-	const fetchPosts = usePostStore((state) => state.fetchPosts);
-	const deletePost = usePostStore((state) => state.deletePost);
+	const giveaways = useGiveawayStore((state) => state.giveaways);
+	const loading = useGiveawayStore((state) => state.loading);
+	const error = useGiveawayStore((state) => state.error);
+	const fetchGiveaways = useGiveawayStore((state) => state.fetchGiveaways);
+	const deleteGiveaways = useGiveawayStore((state) => state.deleteGiveaways);
 
 	// 2. Chiamiamo l'azione al montaggio
 	useEffect(() => {
-		fetchPosts();
-	}, [fetchPosts]); // buona regola in uno useEffect mettere la dipendenza da tutti gli elementi che hanno uno stato usati al suo interno
+		fetchGiveaways();
+	}, [fetchGiveaways]); // buona regola in uno useEffect mettere la dipendenza da tutti gli elementi che hanno uno stato usati al suo interno
 
 	return (
 		<Container size="md" py="xl">
 			<Title order={2} ta="center" mb="lg" c="blue.8">
 				Lista dei Post (Zustand & Mantine)
 			</Title>
-
-			{/* Form di aggiunta */}
-			<FormPost />
 
 			{/* Gestione errori */}
 			{error && (
@@ -47,15 +43,15 @@ export function ListaPost() {
 			)}
 
 			{/* Schermata di caricamento */}
-			{loading && posts.length === 0 ? (
+			{loading && giveaways.length === 0 ? (
 				<Center my="xl">
 					<Loader size="lg" color="blue" />
 				</Center>
 			) : (
 				<SimpleGrid cols={{ base: 1, sm: 2 }} spacing="lg">
-					{posts.map((post) => (
+					{giveaways.map((post) => (
 						<Card
-							key={post.id}
+							key={giveaways.id}
 							shadow="sm"
 							padding="lg"
 							radius="md"
@@ -63,7 +59,7 @@ export function ListaPost() {
 							style={{ display: "flex", flexDirection: "column" }}
 						>
 							<Title order={3} size="h5" lineClamp={1} mb="xs">
-								{post.title}
+								{giveaways.title}
 							</Title>
 
 							<Text
@@ -87,7 +83,7 @@ export function ListaPost() {
 								<Button
 									variant="light"
 									color="red"
-									onClick={() => deletePost(post.id)}
+									onClick={() => deleteGiveaways(post.id)}
 								>
 									Elimina
 								</Button>
@@ -97,7 +93,7 @@ export function ListaPost() {
 				</SimpleGrid>
 			)}
 
-			{!loading && posts.length === 0 && (
+			{!loading && giveaways.length === 0 && (
 				<Text ta="center" c="dimmed" my="xl">
 					Nessun post presente nello store.
 				</Text>

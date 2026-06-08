@@ -12,15 +12,13 @@ export const useGiveawayStore = create((set, get) => ({
 
 	// Recupera tutti i giveaway (limitati ai primi 6 per pulizia)
 	fetchGiveaways: async () => {
-		// Pedagogical point: se abbiamo già i giveaway in memoria, non ricarichiamo!
-		// Questo mostra il vantaggio di uno store globale (caching dello stato).
 		if (get().giveaways.length > 0) return;
 
 		set({ loading: true, error: null });
 		try {
 			const response = await axios.get("https://gamerpower.com/api/giveaways");
 			// Selezioniamo solo i primi 6 giveaway
-			set({ giveaways: response.data.slice(0, 10), loading: false });
+			set({ giveaways: response.data.slice(0, 12), loading: false });
 		} catch (err) {
 			set({ error: err.message, loading: false });
 		}
