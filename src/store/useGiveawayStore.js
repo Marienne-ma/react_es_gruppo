@@ -16,7 +16,9 @@ export const useGiveawayStore = create((set, get) => ({
 
 		set({ loading: true, error: null });
 		try {
-			const response = await axios.get("https://gamerpower.com/api/giveaways");
+			const response = await axios.get(
+				"https://www.gamerpower.com/api/giveaways",
+			);
 			// Selezioniamo solo i primi 6 giveaway
 			set({ giveaways: response.data.slice(0, 12), loading: false });
 		} catch (err) {
@@ -37,7 +39,7 @@ export const useGiveawayStore = create((set, get) => ({
 			} else {
 				// Altrimenti facciamo una chiamata al server (es. se l'utente ricarica la pagina di dettaglio)
 				const response = await axios.get(
-					`https://gamerpower.com/api/giveaways?id=${id}`,
+					`https://www.gamerpower.com/api/giveaways?id=${id}`,
 				);
 				set({ selectedGiveaway: response.data, loading: false });
 			}
@@ -52,7 +54,7 @@ export const useGiveawayStore = create((set, get) => ({
 		try {
 			// JSONPlaceholder simula il salvataggio restituendo l'oggetto inviato con ID 101
 			const response = await axios.post(
-				"https://gamerpower.com/api/giveaways",
+				"https://www.gamerpower.com/api/giveaways",
 				nuovoGiveaway,
 			);
 
@@ -76,7 +78,7 @@ export const useGiveawayStore = create((set, get) => ({
 		set({ error: null });
 		try {
 			// Chiamata API per simulare l'eliminazione
-			await axios.delete(`https://gamerpower.com/api/giveaways?id=${id}`);
+			await axios.delete(`https://www.gamerpower.com/api/giveaways?id=${id}`);
 
 			// Filtriamo via il giveaway rimosso dallo stato locale
 			set((state) => ({
