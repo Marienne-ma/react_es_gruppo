@@ -1,0 +1,10 @@
+body {
+  margin: 0;
+  background-color: #f8f9fa;
+}
+
+/* Restrizione di larghezza per la form */
+.form-card {
+  max-width: 500px;
+  margin: 0 auto 30px;
+}
