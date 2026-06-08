@@ -1,17 +1,20 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import '@mantine/core/styles.css'
-import './index.css'
-import App from './App.jsx'
-import { BrowserRouter } from 'react-router-dom'
-import { MantineProvider } from '@mantine/core'
+import { StrictMode } from "react"
+import { createRoot } from "react-dom/client"
+import "@mantine/core/styles.css"
+import "@mantine/notifications/styles.css"
+import "./index.css"
+import App from "./App.jsx"
+import { BrowserRouter } from "react-router-dom"
+import { MantineProvider } from "@mantine/core"
+import { Notifications } from "@mantine/notifications"
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <MantineProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </MantineProvider>
-  </StrictMode>,
+createRoot(document.getElementById("root")).render(
+    <StrictMode>
+        <MantineProvider>
+            <Notifications />
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </MantineProvider>
+    </StrictMode>,
 )
