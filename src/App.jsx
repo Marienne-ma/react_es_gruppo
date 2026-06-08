@@ -3,6 +3,7 @@ import { NavLink, Route, Routes } from 'react-router-dom'
 import { Container, Group, Paper } from '@mantine/core'
 import { ListaPost } from './components/ListaPost'
 import { DettaglioPost } from './components/DettaglioPost'
+import {FormGiveaway} from './components/FormGiveaway'
 
 function App() {
   // Stile dinamico per il link attivo nella barra di navigazione
@@ -24,6 +25,7 @@ function App() {
       </Paper>
 
       <main>
+        <FormGiveaway/>
         <Routes>
           <Route path="/" element={<ListaPost />} />
           <Route path="/posts/:id" element={<DettaglioPost />} />
